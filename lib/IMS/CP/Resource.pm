@@ -3,22 +3,23 @@ use Moose;
 
 use Encode ();
 
-use IMS::LOM::LangString;
 use IMS::CP::Resource::File;
 
-with 'IMS::Include::XMLNode',
-     'IMS::Include::XPathContext';
+with 'IMS::Include::XMLNode';
+with 'IMS::Include::XPathContext';
+with 'IMS::Include::findvalue';
+with 'IMS::Include::find';
+with 'IMS::Include::findnodes';
 
 has 'href' => (
-    is => 'ro',
-    isa => 'Str',
+    is         => 'ro',
+    isa        => 'Str',
     lazy_build => 1,
 );
 
 sub _build_href {
     my ($self) = @_;
-    my $href = $self->xpc->findvalue( './@href', $self->node );
-    return $href;
+    return $self->findvalue( './@href' );
 }
 
 sub found {
@@ -35,15 +36,10 @@ has 'title' => (
 
 sub _build_title {
     my ( $self ) = @_;
-
-    my $node = $self->xpc->find( './cp:metadata/lom:lom/lom:general/lom:title', $self->node )->shift();
-
-    my $title = IMS::LOM::LangString->new(
-        xpc   => $self->xpc,
-        node  => $node,
+    return $self->find(
+        './cp:metadata/lom:lom/lom:general/lom:title',
+        'IMS::LOM::LangString'
     );
-    
-    return $title;    
 }
 
 has 'files' => (
@@ -54,11 +50,10 @@ has 'files' => (
 
 sub _build_files {
     my ($self) = @_;
-    my @files;
-    foreach my $file ( $self->xpc->findnodes( './cp:file', $self->node ) ) {
-        push @files, IMS::CP::Resource::File->new( node => $file, xpc => $self->xpc );
-    }
-    return \@files;
+    return $self->findnodes(
+        './cp:file',
+        'IMS::CP::Resource::File',
+    );
 }
 
 no Moose;

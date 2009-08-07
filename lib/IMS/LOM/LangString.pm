@@ -1,8 +1,9 @@
 package IMS::LOM::LangString;
 use Moose;
 
-with 'IMS::Include::XMLNode',
-     'IMS::Include::XPathContext';
+with 'IMS::Include::XMLNode';
+with 'IMS::Include::XPathContext';
+with 'IMS::Include::findvalue';
 
 has 'language' => (
     is         => 'ro',
@@ -12,8 +13,7 @@ has 'language' => (
 
 sub _build_language {
     my ( $self ) = @_;
-    my $language = $self->xpc->findvalue( './lom:langstring/@xml:lang', $self->node );
-    return defined($language) ? $language : "";
+    return $self->findvalue( './lom:langstring/@xml:lang' );
 }
 
 has 'text' => (
@@ -24,8 +24,7 @@ has 'text' => (
 
 sub _build_text {
     my ( $self ) = @_;
-    my $text = $self->xpc->findvalue( './lom:langstring', $self->node );
-    return defined($text) ? $text : "";
+    return $self->findvalue( './lom:langstring' );
 }
 
 no Moose;

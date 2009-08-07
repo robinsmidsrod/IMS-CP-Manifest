@@ -3,8 +3,10 @@ use Moose;
 
 use IMS::CP::Organization::Item;
 
-with 'IMS::Include::XMLNode',
-     'IMS::Include::XPathContext';
+with 'IMS::Include::XMLNode';
+with 'IMS::Include::XPathContext';
+with 'IMS::Include::findvalue';
+with 'IMS::Include::findnodes';
 
 has 'title' => (
     is         => 'ro',
@@ -14,8 +16,7 @@ has 'title' => (
 
 sub _build_title {
     my ($self) = @_;
-    my $title = $self->xpc->findvalue( './cp:title', $self->node );
-    return $title;
+    return $self->findvalue( './cp:title' );
 }
 
 has 'items' => (
@@ -26,11 +27,10 @@ has 'items' => (
 
 sub _build_items {
     my ($self) = @_;
-    my @items;
-    foreach my $item ( $self->xpc->findnodes( './cp:item', $self->node ) ) {
-        push @items, IMS::CP::Organization::Item->new( node => $item, xpc => $self->xpc );
-    }
-    return \@items;
+    return $self->findnodes(
+        './cp:item',
+        'IMS::CP::Organization::Item',
+    );
 }
 
 no Moose;

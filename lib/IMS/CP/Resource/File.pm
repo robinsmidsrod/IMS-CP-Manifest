@@ -5,8 +5,10 @@ use Encode ();
 
 use IMS::LOM::LangString;
 
-with 'IMS::Include::XMLNode',
-     'IMS::Include::XPathContext';
+with 'IMS::Include::XMLNode';
+with 'IMS::Include::XPathContext';
+with 'IMS::Include::findvalue';
+with 'IMS::Include::find';
 
 has 'href' => (
     is         => 'ro',
@@ -16,8 +18,7 @@ has 'href' => (
 
 sub _build_href {
     my ($self) = @_;
-    my $href = $self->xpc->findvalue( './@href', $self->node );
-    return $href;
+    return $self->findvalue( './@href' );
 }
 
 sub found {
@@ -34,8 +35,7 @@ has 'id' => (
 
 sub _build_id {
     my ($self) = @_;
-    my $id = $self->xpc->findvalue( './cp:metadata/lom:lom/lom:general/lom:identifier', $self->node );
-    return $id;
+    return $self->findvalue( './cp:metadata/lom:lom/lom:general/lom:identifier' );
 }
 
 has 'title' => (
@@ -46,15 +46,10 @@ has 'title' => (
 
 sub _build_title {
     my ( $self ) = @_;
-
-    my $node = $self->xpc->find( './cp:metadata/lom:lom/lom:general/lom:title', $self->node )->shift();
-
-    my $title = IMS::LOM::LangString->new(
-        xpc   => $self->xpc,
-        node  => $node,
+    return $self->find(
+        './cp:metadata/lom:lom/lom:general/lom:title',
+        'IMS::LOM::LangString',
     );
-    
-    return $title;    
 }
 
 no Moose;

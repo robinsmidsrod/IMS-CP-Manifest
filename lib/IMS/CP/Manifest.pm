@@ -1,5 +1,6 @@
 package IMS::CP::Manifest;
 use Moose;
+extends 'IMS::CP::XML::RootNode';
 
 use 5.008; # According to Perl::MinimumVersion
 
@@ -8,7 +9,8 @@ our $VERSION = '0.01';
 use IMS::LOM::LangString;
 use IMS::CP::Organization;
 
-extends 'IMS::CP::XML::RootNode';
+with 'IMS::Include::find';
+with 'IMS::Include::findnodes';
 
 has 'title' => (
     is         => 'ro',
@@ -18,18 +20,10 @@ has 'title' => (
 
 sub _build_title {
     my ( $self ) = @_;
-
-    my $node = $self->xpc->find(
+    return $self->find(
         './cp:metadata/lom:lom/lom:general/lom:title',
-        $self->node
-    )->shift();
-
-    my $title = IMS::LOM::LangString->new(
-        xpc   => $self->xpc,
-        node  => $node,
+        'IMS::LOM::LangString'
     );
-    
-    return $title;    
 }
 
 has 'organizations' => (
@@ -40,15 +34,10 @@ has 'organizations' => (
 
 sub _build_organizations {
     my ( $self ) = @_;
-    my @orgs;
-    foreach my $node ( $self->xpc->findnodes( '/cp:manifest/cp:organizations/*' ) ) {
-        my $instance = IMS::CP::Organization->new(
-            node => $node,
-            xpc => $self->xpc
-        );
-        push @orgs, $instance;
-    }
-    return \@orgs;
+    return $self->findnodes(
+        '/cp:manifest/cp:organizations/*',
+        'IMS::CP::Organization',
+    );
 }
 
 no Moose;

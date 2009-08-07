@@ -4,8 +4,10 @@ use Moose;
 use IMS::LOM::LangString;
 use IMS::CP::Resource;
 
-with 'IMS::Include::XMLNode',
-     'IMS::Include::XPathContext';
+with 'IMS::Include::XMLNode';
+with 'IMS::Include::XPathContext';
+with 'IMS::Include::findvalue';
+with 'IMS::Include::find';
 
 has 'id' => (
     is         => 'ro',
@@ -15,7 +17,7 @@ has 'id' => (
 
 sub _build_id {
     my ($self) = @_;
-    my $id = $self->xpc->findvalue( './cp:metadata/lom:lom/lom:general/lom:identifier', $self->node )
+    return $self->findvalue( './cp:metadata/lom:lom/lom:general/lom:identifier' );
 }
 
 has 'title' => (
@@ -26,15 +28,10 @@ has 'title' => (
 
 sub _build_title {
     my ( $self ) = @_;
-
-    my $node = $self->xpc->find( './cp:metadata/lom:lom/lom:general/lom:title', $self->node )->shift();
-
-    my $title = IMS::LOM::LangString->new(
-        xpc   => $self->xpc,
-        node  => $node,
+    return $self->find(
+        './cp:metadata/lom:lom/lom:general/lom:title',
+        'IMS::LOM::LangString',
     );
-    
-    return $title;    
 }
 
 has 'resource' => (
@@ -45,14 +42,10 @@ has 'resource' => (
 
 sub _build_resource {
     my ($self) = @_;
-    
-    my $res = $self->xpc->find( '/cp:manifest/cp:resources/cp:resource[@identifier=' . $self->id . ']' )->shift();
-
-    return IMS::CP::Resource->new(
-        node => $res,
-        xpc  => $self->xpc,
+    return $self->find(
+        '/cp:manifest/cp:resources/cp:resource[@identifier=' . $self->id . ']',
+        'IMS::CP::Resource',
     );
-    
 }
 
 no Moose;
