@@ -7,7 +7,6 @@ use IMS::CP::Resource::File;
 
 with 'IMS::Include::XMLNode';
 with 'IMS::Include::XPathContext';
-with 'IMS::Include::findvalue';
 with 'IMS::Include::find';
 with 'IMS::Include::findnodes';
 

@@ -5,7 +5,6 @@ use IMS::CP::Organization::Item;
 
 with 'IMS::Include::XMLNode';
 with 'IMS::Include::XPathContext';
-with 'IMS::Include::findvalue';
 with 'IMS::Include::findnodes';
 
 use IMS::Include::Attribute::XPathValue;

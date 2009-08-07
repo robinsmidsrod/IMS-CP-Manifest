@@ -3,7 +3,6 @@ use Moose;
 
 with 'IMS::Include::XMLNode';
 with 'IMS::Include::XPathContext';
-with 'IMS::Include::findvalue';
 
 use IMS::Include::Attribute::XPathValue;
 

@@ -13,10 +13,17 @@ has '+lazy' => (
 
 has '+default' => (
     default => sub {
-        my ($attr_self) = @_;
+        my ($attr) = @_;
         return sub {
             my ($self) = @_;
-            $self->findvalue( $attr_self->xpath_query );
+            unless ( $self->can('node') ) {
+                confess(ref($self) . " has no method 'node'")
+            }
+            unless ( $self->can('xpc') ) {
+                confess(ref($self) . " has no method 'xpc'");
+            }
+            my $value = $self->xpc->findvalue( $attr->xpath_query, $self->node );
+            return defined($value) ? $value : "";
         };
     }
 );
