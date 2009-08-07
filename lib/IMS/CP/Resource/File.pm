@@ -5,17 +5,8 @@ use Encode ();
 
 use IMS::LOM::LangString;
 
-has 'node' => (
-    is       => 'ro',
-    isa      => 'XML::LibXML::Node',
-    required => 1,
-);
-
-has 'xpc' => (
-    is       => 'ro',
-    isa      => 'XML::LibXML::XPathContext',
-    required => 1,
-);
+with 'IMS::Include::XMLNode',
+     'IMS::Include::XPathContext';
 
 has 'href' => (
     is         => 'ro',

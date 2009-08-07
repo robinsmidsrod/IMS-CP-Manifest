@@ -1,17 +1,8 @@
 package IMS::LOM::LangString;
 use Moose;
 
-has 'node' => (
-    is       => 'ro',
-    isa      => 'XML::LibXML::Node',
-    required => 1,
-);
-
-has 'xpc' => (
-    is       => 'ro',
-    isa      => 'XML::LibXML::XPathContext',
-    required => 1,
-);
+with 'IMS::Include::XMLNode',
+     'IMS::Include::XPathContext';
 
 has 'language' => (
     is         => 'ro',
