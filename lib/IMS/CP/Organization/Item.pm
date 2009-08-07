@@ -9,16 +9,14 @@ with 'IMS::Include::XPathContext';
 with 'IMS::Include::findvalue';
 with 'IMS::Include::find';
 
-has 'id' => (
-    is         => 'ro',
-    isa        => 'Str',
-    lazy_build => 1,
-);
+use IMS::Include::Attribute::XPathValue;
 
-sub _build_id {
-    my ($self) = @_;
-    return $self->findvalue( './cp:metadata/lom:lom/lom:general/lom:identifier' );
-}
+has 'id' => (
+    is          => 'ro',
+    isa         => 'Str',
+    traits      => [qw/XPathValue/],
+    xpath_query => './cp:metadata/lom:lom/lom:general/lom:identifier',
+);
 
 has 'title' => (
     is         => 'ro',

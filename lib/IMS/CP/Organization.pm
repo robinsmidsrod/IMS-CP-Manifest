@@ -8,16 +8,14 @@ with 'IMS::Include::XPathContext';
 with 'IMS::Include::findvalue';
 with 'IMS::Include::findnodes';
 
-has 'title' => (
-    is         => 'ro',
-    isa        => 'Str',
-    lazy_build => 1,
-);
+use IMS::Include::Attribute::XPathValue;
 
-sub _build_title {
-    my ($self) = @_;
-    return $self->findvalue( './cp:title' );
-}
+has 'title' => (
+    is          => 'ro',
+    isa         => 'Str',
+    traits      => [qw/XPathValue/],
+    xpath_query => './cp:title',
+);
 
 has 'items' => (
     is         => 'ro',

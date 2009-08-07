@@ -11,16 +11,14 @@ with 'IMS::Include::findvalue';
 with 'IMS::Include::find';
 with 'IMS::Include::findnodes';
 
-has 'href' => (
-    is         => 'ro',
-    isa        => 'Str',
-    lazy_build => 1,
-);
+use IMS::Include::Attribute::XPathValue;
 
-sub _build_href {
-    my ($self) = @_;
-    return $self->findvalue( './@href' );
-}
+has 'href' => (
+    is          => 'ro',
+    isa         => 'Str',
+    traits      => [qw/XPathValue/],
+    xpath_query => './@href',
+);
 
 sub found {
     my ($self) = @_;
