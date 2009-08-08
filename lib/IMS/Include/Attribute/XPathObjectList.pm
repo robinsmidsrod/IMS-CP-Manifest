@@ -29,7 +29,13 @@ has '+default' => (
             }
 
             # Run code reference if necessary to build xpath query
-            my $xpath_query = ref($attr->xpath_query) eq 'CODE'
+            my $xpath_query = (
+                                ref($attr->xpath_query) eq 'CODE'
+                             || (
+                                  blessed($attr->xpath_query)
+                               && $attr->xpath_query->isa('Class::MOP::Method')
+                              )
+                            )
                             ? $attr->xpath_query->($self)
                             : $attr->xpath_query;
 
