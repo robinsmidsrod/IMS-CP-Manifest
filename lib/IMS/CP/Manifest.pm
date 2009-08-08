@@ -6,25 +6,18 @@ use 5.008; # According to Perl::MinimumVersion
 
 our $VERSION = '0.01';
 
-use IMS::LOM::LangString;
 use IMS::CP::Organization;
 
-with 'IMS::Include::find';
 with 'IMS::Include::findnodes';
 
-has 'title' => (
-    is         => 'ro',
-    isa        => 'IMS::LOM::LangString',
-    lazy_build => 1,
-);
+use IMS::Include::Attribute::XPathObject;
 
-sub _build_title {
-    my ( $self ) = @_;
-    return $self->find(
-        './cp:metadata/lom:lom/lom:general/lom:title',
-        'IMS::LOM::LangString'
-    );
-}
+has 'title' => (
+    is          => 'ro',
+    isa         => 'IMS::LOM::LangString',
+    traits      => [qw/XPathObject/],
+    xpath_query => './cp:metadata/lom:lom/lom:general/lom:title',
+);
 
 has 'organizations' => (
     is         => 'ro',

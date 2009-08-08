@@ -3,13 +3,11 @@ use Moose;
 
 use Encode ();
 
-use IMS::LOM::LangString;
-
 with 'IMS::Include::XMLNode';
 with 'IMS::Include::XPathContext';
-with 'IMS::Include::find';
 
 use IMS::Include::Attribute::XPathValue;
+use IMS::Include::Attribute::XPathObject;
 
 has 'href' => (
     is          => 'ro',
@@ -32,18 +30,11 @@ has 'id' => (
 );
 
 has 'title' => (
-    is         => 'ro',
-    isa        => 'IMS::LOM::LangString',
-    lazy_build => 1,
+    is          => 'ro',
+    isa         => 'IMS::LOM::LangString',
+    traits      => [qw/XPathObject/],
+    xpath_query => './cp:metadata/lom:lom/lom:general/lom:title',
 );
-
-sub _build_title {
-    my ( $self ) = @_;
-    return $self->find(
-        './cp:metadata/lom:lom/lom:general/lom:title',
-        'IMS::LOM::LangString',
-    );
-}
 
 no Moose;
 __PACKAGE__->meta->make_immutable();

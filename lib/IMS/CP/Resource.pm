@@ -7,10 +7,10 @@ use IMS::CP::Resource::File;
 
 with 'IMS::Include::XMLNode';
 with 'IMS::Include::XPathContext';
-with 'IMS::Include::find';
 with 'IMS::Include::findnodes';
 
 use IMS::Include::Attribute::XPathValue;
+use IMS::Include::Attribute::XPathObject;
 
 has 'href' => (
     is          => 'ro',
@@ -26,18 +26,11 @@ sub found {
 }
 
 has 'title' => (
-    is         => 'ro',
-    isa        => 'IMS::LOM::LangString',
-    lazy_build => 1,
+    is          => 'ro',
+    isa         => 'IMS::LOM::LangString',
+    traits      => [qw/XPathObject/],
+    xpath_query => './cp:metadata/lom:lom/lom:general/lom:title',
 );
-
-sub _build_title {
-    my ( $self ) = @_;
-    return $self->find(
-        './cp:metadata/lom:lom/lom:general/lom:title',
-        'IMS::LOM::LangString'
-    );
-}
 
 has 'files' => (
     is         => 'ro',
