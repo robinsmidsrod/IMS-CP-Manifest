@@ -6,11 +6,8 @@ use 5.008; # According to Perl::MinimumVersion
 
 our $VERSION = '0.01';
 
-use IMS::CP::Organization;
-
-with 'IMS::Include::findnodes';
-
 use IMS::Include::Attribute::XPathObject;
+use IMS::Include::Attribute::XPathObjectList;
 
 has 'title' => (
     is          => 'ro',
@@ -20,18 +17,11 @@ has 'title' => (
 );
 
 has 'organizations' => (
-    is         => 'ro',
-    isa        => 'ArrayRef[IMS::CP::Organization]',
-    lazy_build => 1,
+    is          => 'ro',
+    isa         => 'ArrayRef[IMS::CP::Organization]',
+    traits      => [qw/XPathObjectList/],
+    xpath_query => '/cp:manifest/cp:organizations/*',
 );
-
-sub _build_organizations {
-    my ( $self ) = @_;
-    return $self->findnodes(
-        '/cp:manifest/cp:organizations/*',
-        'IMS::CP::Organization',
-    );
-}
 
 no Moose;
 __PACKAGE__->meta->make_immutable();

@@ -7,10 +7,10 @@ use IMS::CP::Resource::File;
 
 with 'IMS::Include::XMLNode';
 with 'IMS::Include::XPathContext';
-with 'IMS::Include::findnodes';
 
 use IMS::Include::Attribute::XPathValue;
 use IMS::Include::Attribute::XPathObject;
+use IMS::Include::Attribute::XPathObjectList;
 
 has 'href' => (
     is          => 'ro',
@@ -33,18 +33,11 @@ has 'title' => (
 );
 
 has 'files' => (
-    is         => 'ro',
-    isa        => 'ArrayRef[IMS::CP::Resource::File]',
-    lazy_build => 1,
+    is          => 'ro',
+    isa         => 'ArrayRef[IMS::CP::Resource::File]',
+    traits      => [qw/XPathObjectList/],
+    xpath_query => './cp:file',
 );
-
-sub _build_files {
-    my ($self) = @_;
-    return $self->findnodes(
-        './cp:file',
-        'IMS::CP::Resource::File',
-    );
-}
 
 no Moose;
 __PACKAGE__->meta->make_immutable();
