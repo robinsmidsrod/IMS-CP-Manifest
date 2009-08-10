@@ -1,11 +1,8 @@
 package IMS::CP::Resource::File;
 use Moose;
+extends 'IMS::Include::XML::Node';
 
 use Encode ();
-
-with 'IMS::Include::XMLNode';
-with 'IMS::Include::XPathContext';
-
 use IMS::Include::Attribute::XPathValue;
 use IMS::Include::Attribute::XPathObject;
 

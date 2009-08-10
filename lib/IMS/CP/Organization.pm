@@ -1,10 +1,6 @@
 package IMS::CP::Organization;
 use Moose;
-
-use IMS::CP::Organization::Item;
-
-with 'IMS::Include::XMLNode';
-with 'IMS::Include::XPathContext';
+extends 'IMS::Include::XML::Node';
 
 use IMS::Include::Attribute::XPathValue;
 use IMS::Include::Attribute::XPathObjectList;

@@ -1,8 +1,6 @@
 package IMS::LOM::LangString;
 use Moose;
-
-with 'IMS::Include::XMLNode';
-with 'IMS::Include::XPathContext';
+extends 'IMS::Include::XML::Node';
 
 use IMS::Include::Attribute::XPathValue;
 
