@@ -20,7 +20,7 @@ sub _build_document {
 sub dump {
     my ( $self ) = @_;
     return Encode::decode(
-        $self->document->encoding,
+        $self->document->actualEncoding,
         $self->document->toString(1),
     );
 }

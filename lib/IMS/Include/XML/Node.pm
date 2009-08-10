@@ -18,7 +18,7 @@ has 'xpc' => (
 sub dump {
     my ($self) = @_;
     return Encode::decode(
-        $self->node->ownerDocument->encoding,
+        $self->node->ownerDocument->actualEncoding,
         $self->node->toString(1),
     );
 }
