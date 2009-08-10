@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 36;
+use Test::More tests => 39;
 
 use utf8;
 use IMS::CP::Manifest;
@@ -11,6 +11,15 @@ use IMS::CP::Manifest;
 my $manifest = IMS::CP::Manifest->new( file => 't/data/10_parse/imsmanifest.xml' );
 isa_ok($manifest,'IMS::CP::Manifest');
 
+isa_ok($manifest->title, 'IMS::LOM::LangString');
+my $title_dump = <<'XML';
+<imsmd:title>
+  <imsmd:langstring xml:lang="no">Oppsummering</imsmd:langstring>
+</imsmd:title>
+XML
+chomp($title_dump);
+#diag($manifest->title->dump);
+ok($manifest->title->dump eq $title_dump, "title XML dump mismatch");
 ok($manifest->title->language eq 'no', "manifest title language mismatch");
 ok($manifest->title->text eq 'Oppsummering', "manifest title text mismatch");
 
@@ -62,6 +71,14 @@ ok( $file4->id eq 'Stromgren-Tok_Pisin', "file4 id mismatch");
 ok( $file4->href eq 'resources/Tok Pisin med Jo Stroemgren Co..flv', "file4 href mismatch");
 ok( $file4->title->language eq 'no', "file4 title language mismatch");
 ok( $file4->title->text eq 'Tok Pisin med Jo Strømgren Co.', "file4 title text mismatch");
+my $file4_title_dump = <<'XML';
+<imsmd:title>
+  <imsmd:langstring xml:lang="no">Tok Pisin med Jo Strømgren Co.</imsmd:langstring>
+</imsmd:title>
+XML
+chomp($file4_title_dump);
+#diag($file4->title->dump);
+ok($file4->title->dump eq $file4_title_dump, "file4 title XML dump mismatch");
     
 exit;
 

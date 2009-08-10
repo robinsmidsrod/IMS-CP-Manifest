@@ -3,7 +3,6 @@ use Moose;
 extends 'IMS::Include::XMLParser';
 
 use Encode ();
-use XML::LibXML::XPathContext ();
 
 has 'document' => (
     is         => 'ro',
@@ -14,22 +13,14 @@ has 'document' => (
 sub _build_document {
     my ( $self ) = @_;
     my $doc = $self->parser->parse_file( $self->file );
-    die("No input file specified.\n") unless $doc;
-    $doc->setEncoding( $self->output_encoding );
+    confess("No input file specified.\n") unless $doc;
     return $doc;
 }
-
-has 'output_encoding' => (
-    is      => 'ro',
-    isa     => 'Str',
-    lazy    => 1,
-    default => 'UTF-8',
-);
 
 sub dump {
     my ( $self ) = @_;
     return Encode::decode(
-        $self->output_encoding,
+        $self->document->encoding,
         $self->document->toString(1),
     );
 }

@@ -1,6 +1,8 @@
 package IMS::Include::XML::Node;
 use Moose;
 
+use Encode ();
+
 has 'node' => (
     is       => 'ro',
     isa      => 'XML::LibXML::Node',
@@ -12,6 +14,14 @@ has 'xpc' => (
     isa      => 'XML::LibXML::XPathContext',
     required => 1,
 );
+
+sub dump {
+    my ($self) = @_;
+    return Encode::decode(
+        $self->node->ownerDocument->encoding,
+        $self->node->toString(1),
+    );
+}
 
 no Moose;
 __PACKAGE__->meta->make_immutable();
