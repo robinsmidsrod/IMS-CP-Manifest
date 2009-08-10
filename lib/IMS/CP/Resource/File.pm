@@ -13,12 +13,6 @@ has 'href' => (
     xpath_query => './@href',
 );
 
-sub found {
-    my ($self) = @_;
-    my $filename = Encode::encode_utf8( $self->href );
-    return -r $filename; 
-}
-
 has 'id' => (
     is          => 'ro',
     isa         => 'Str',
