@@ -3,12 +3,6 @@ use Moose;
 
 use XML::LibXML ();
 
-has 'file' => (
-    is       => 'ro',
-    isa      => 'Str',
-    required => 1,
-);
-
 has 'parser' => (
     is         => 'ro',
     isa        => 'XML::LibXML',

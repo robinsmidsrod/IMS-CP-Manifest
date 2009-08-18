@@ -4,6 +4,12 @@ extends 'IMS::Include::XML::Parser';
 
 use Encode ();
 
+has 'file' => (
+    is       => 'ro',
+    isa      => 'Str',
+    required => 1,
+);
+
 has 'document' => (
     is         => 'ro',
     isa        => 'XML::LibXML::Document',
