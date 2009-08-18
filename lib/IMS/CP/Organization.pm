@@ -1,6 +1,6 @@
 package IMS::CP::Organization;
 use Moose;
-extends 'IMS::Include::XML::Node';
+extends 'Rabbit::Node';
 
 has 'title' => (
     is          => 'ro',

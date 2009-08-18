@@ -20,9 +20,8 @@ no_index:
     - inc
     - t
 requires:
-  Encode: 2.26
   Moose: 0.88
-  XML::LibXML: 1.69
+  Rabbit: 0.01
   perl: 5.8.0
 resources:
   license: http://dev.perl.org/licenses/

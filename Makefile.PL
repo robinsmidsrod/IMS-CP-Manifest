@@ -7,8 +7,7 @@ license         'perl';
 all_from        'lib/IMS/CP/Manifest.pm';
 
 requires        'Moose'         => '0.88';
-requires        'XML::LibXML'   => '1.69';
-requires        'Encode'        => '2.26';
+requires        'Rabbit'        => '0.01';
 
 test_requires   'utf8'          => '1.06';
 test_requires   'Test::More'    => '0.88';
