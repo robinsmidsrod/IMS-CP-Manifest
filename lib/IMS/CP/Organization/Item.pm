@@ -2,9 +2,6 @@ package IMS::CP::Organization::Item;
 use Moose;
 extends 'IMS::Include::XML::Node';
 
-use IMS::Include::Attribute::XPathValue;
-use IMS::Include::Attribute::XPathObject;
-
 has 'id' => (
     is          => 'ro',
     isa         => 'Str',

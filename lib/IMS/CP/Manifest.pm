@@ -3,11 +3,7 @@ use Moose;
 extends 'IMS::Include::XML::RootNode';
 
 use 5.008; # According to Perl::MinimumVersion
-
 our $VERSION = '0.01';
-
-use IMS::Include::Attribute::XPathObject;
-use IMS::Include::Attribute::XPathObjectList;
 
 ### Namespace mapping (xmlns)
 

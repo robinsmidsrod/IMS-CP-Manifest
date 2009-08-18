@@ -4,6 +4,11 @@ extends 'IMS::Include::XML::Document';
 
 use XML::LibXML::XPathContext ();
 
+# Preload XPath attribute traits
+use IMS::Include::Attribute::XPathValue;
+use IMS::Include::Attribute::XPathObject;
+use IMS::Include::Attribute::XPathObjectList;
+
 has 'xpc' => (
     is         => 'ro',
     isa        => 'XML::LibXML::XPathContext',

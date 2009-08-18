@@ -2,9 +2,6 @@ package IMS::CP::Resource::File;
 use Moose;
 extends 'IMS::Include::XML::Node';
 
-use IMS::Include::Attribute::XPathValue;
-use IMS::Include::Attribute::XPathObject;
-
 has 'href' => (
     is          => 'ro',
     isa         => 'Str',
