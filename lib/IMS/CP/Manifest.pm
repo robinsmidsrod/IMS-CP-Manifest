@@ -1,6 +1,6 @@
 package IMS::CP::Manifest;
 use Moose;
-extends 'IMS::CP::XML::RootNode';
+extends 'IMS::Include::XML::RootNode';
 
 use 5.008; # According to Perl::MinimumVersion
 
@@ -8,6 +8,23 @@ our $VERSION = '0.01';
 
 use IMS::Include::Attribute::XPathObject;
 use IMS::Include::Attribute::XPathObjectList;
+
+### Namespace mapping (xmlns)
+
+has 'namespace_map' => (
+    is         => 'ro',
+    isa        => 'HashRef[Str]',
+    lazy_build => 1,
+);
+
+sub _build_namespace_map {
+    return {
+        'cp'  => 'http://www.imsglobal.org/xsd/imscp_v1p1',
+        'lom' => 'http://www.imsglobal.org/xsd/imsmd_v1p2',
+    };
+}
+
+### Attributes
 
 has 'title' => (
     is          => 'ro',

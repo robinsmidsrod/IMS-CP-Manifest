@@ -1,6 +1,6 @@
-package IMS::Include::XMLDocument;
+package IMS::Include::XML::Document;
 use Moose;
-extends 'IMS::Include::XMLParser';
+extends 'IMS::Include::XML::Parser';
 
 use Encode ();
 

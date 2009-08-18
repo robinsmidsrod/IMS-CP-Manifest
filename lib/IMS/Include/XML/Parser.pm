@@ -1,4 +1,4 @@
-package IMS::Include::XMLParser;
+package IMS::Include::XML::Parser;
 use Moose;
 
 use XML::LibXML ();

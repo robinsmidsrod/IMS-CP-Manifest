@@ -3,13 +3,17 @@
 use strict;
 use warnings;
 
-use Test::More tests => 39;
+use Test::More tests => 41;
 
 use utf8;
 use IMS::CP::Manifest;
 
 my $manifest = IMS::CP::Manifest->new( file => 't/data/10_parse/imsmanifest.xml' );
 isa_ok($manifest,'IMS::CP::Manifest');
+
+# Verify that xmlns prefixes are present
+ok($manifest->xpc->lookupNs('cp') eq 'http://www.imsglobal.org/xsd/imscp_v1p1', "IMS CP namespace mismatch");
+ok($manifest->xpc->lookupNs('lom') eq 'http://www.imsglobal.org/xsd/imsmd_v1p2', "IMS LOM namespace mismatch");
 
 isa_ok($manifest->title, 'IMS::LOM::LangString');
 my $title_dump = <<'XML';

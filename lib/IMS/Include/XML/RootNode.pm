@@ -1,6 +1,6 @@
-package IMS::CP::XML::RootNode;
+package IMS::Include::XML::RootNode;
 use Moose;
-extends 'IMS::Include::XMLDocument';
+extends 'IMS::Include::XML::Document';
 
 use XML::LibXML::XPathContext ();
 
@@ -13,8 +13,11 @@ has 'xpc' => (
 sub _build_xpc {
     my ($self) = @_;
     my $xpc = XML::LibXML::XPathContext->new( $self->document );
-    $xpc->registerNs('cp',  'http://www.imsglobal.org/xsd/imscp_v1p1');
-    $xpc->registerNs('lom', 'http://www.imsglobal.org/xsd/imsmd_v1p2');
+    if ( $self->can('namespace_map') ) {
+        foreach my $prefix ( keys %{ $self->namespace_map } ) {
+            $xpc->registerNs($prefix, $self->namespace_map->{$prefix});
+        }
+    }
     return $xpc;
 }
 
