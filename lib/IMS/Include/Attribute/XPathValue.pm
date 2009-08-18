@@ -3,7 +3,7 @@ use Moose::Role;
 
 has 'xpath_query' => (
     is       => 'ro',
-    isa      => 'Str',
+    isa      => 'Str|CodeRef',
     required => 1,
 );
 
@@ -22,7 +22,19 @@ has '+default' => (
             unless ( $self->can('xpc') ) {
                 confess(ref($self) . " has no method 'xpc'");
             }
-            my $value = $self->xpc->findvalue( $attr->xpath_query, $self->node );
+
+            # Run code reference if necessary to build xpath query
+            my $xpath_query = (
+                                ref($attr->xpath_query) eq 'CODE'
+                             || (
+                                  blessed($attr->xpath_query)
+                               && $attr->xpath_query->isa('Class::MOP::Method')
+                              )
+                            )
+                            ? $attr->xpath_query->($self)
+                            : $attr->xpath_query;
+
+            my $value = $self->xpc->findvalue( $xpath_query, $self->node );
             return defined($value) ? $value : "";
         };
     }
