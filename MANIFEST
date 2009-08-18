@@ -12,13 +12,13 @@ lib/IMS/CP/Organization.pm
 lib/IMS/CP/Organization/Item.pm
 lib/IMS/CP/Resource.pm
 lib/IMS/CP/Resource/File.pm
-lib/IMS/CP/XML/RootNode.pm
 lib/IMS/Include/Attribute/XPathObject.pm
 lib/IMS/Include/Attribute/XPathObjectList.pm
 lib/IMS/Include/Attribute/XPathValue.pm
+lib/IMS/Include/XML/Document.pm
 lib/IMS/Include/XML/Node.pm
-lib/IMS/Include/XMLDocument.pm
-lib/IMS/Include/XMLParser.pm
+lib/IMS/Include/XML/Parser.pm
+lib/IMS/Include/XML/RootNode.pm
 lib/IMS/LOM/LangString.pm
 Makefile.PL
 MANIFEST			This list of files
