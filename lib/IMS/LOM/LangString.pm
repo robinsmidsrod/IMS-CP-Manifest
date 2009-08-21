@@ -3,14 +3,12 @@ use Moose;
 extends 'Rabbit::Node';
 
 has 'language' => (
-    is          => 'ro',
     isa         => 'Str',
     traits      => [qw/XPathValue/],
     xpath_query => './lom:langstring/@xml:lang',
 );
 
 has 'text' => (
-    is          => 'ro',
     isa         => 'Str',
     traits      => [qw/XPathValue/],
     xpath_query => './lom:langstring',

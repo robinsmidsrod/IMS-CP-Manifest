@@ -23,14 +23,12 @@ sub _build_namespace_map {
 ### Attributes
 
 has 'title' => (
-    is          => 'ro',
     isa         => 'IMS::LOM::LangString',
     traits      => [qw/XPathObject/],
     xpath_query => './cp:metadata/lom:lom/lom:general/lom:title',
 );
 
 has 'organizations' => (
-    is          => 'ro',
     isa         => 'ArrayRef[IMS::CP::Organization]',
     traits      => [qw/XPathObjectList/],
     xpath_query => '/cp:manifest/cp:organizations/*',
