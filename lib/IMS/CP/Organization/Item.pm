@@ -1,6 +1,6 @@
 package IMS::CP::Organization::Item;
 use Moose;
-extends 'Rabbit::Node';
+with 'Rabbit::Node';
 
 has 'id' => (
     isa         => 'Str',
