@@ -2,6 +2,12 @@ package IMS::CP::Resource;
 use Moose;
 with 'Rabbit::Node';
 
+has 'id' => (
+    isa         => 'Str',
+    traits      => ['XPathValue'],
+    xpath_query => './cp:metadata/lom:lom/lom:general/lom:identifier',
+);
+
 has 'href' => (
     isa         => 'Str',
     traits      => [qw/XPathValue/],

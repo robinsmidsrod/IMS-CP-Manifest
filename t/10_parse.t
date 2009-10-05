@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 41;
+use Test::More tests => 43;
 
 use utf8;
 use IMS::CP::Manifest;
@@ -50,6 +50,7 @@ is( $item4->title->text, '8.5-XTRA Fra deler til helhet', "item4 title text mism
 
 my $res0 = $item0->resource;
 isa_ok($res0, 'IMS::CP::Resource');
+is( $res0->id, 'content_item_657075_722716', 'res0 id mismatch');
 is( $res0->href, '8.1-XTRA Virkemiddel: Musikk, tempo og rytme/8.1 Virkemiddel: Musikk, tempo og rytme.html', "res0 href mismatch");
 is( $res0->title->language, 'no', "res0 title language mismatch");
 is( $res0->title->text, '8.1 Virkemiddel: Musikk, tempo og rytme', "res0 title text mismatch");
@@ -57,6 +58,7 @@ ok( @{ $res0->files } == 1, 'res0 file count is not 1');
 
 my $res4 = $item4->resource;
 isa_ok($res4, 'IMS::CP::Resource');
+is( $res4->id, 'content_item_657075_722762', 'res4 id mismatch');
 is( $res4->href, '8.5-XTRA Fra deler til helhet/8.5 Fra deler til helhet.html', "res4 href mismatch");
 is( $res4->title->language, 'no', "res4 title language mismatch");
 is( $res4->title->text, '8.5 Fra deler til helhet', "res4 title text mismatch");
