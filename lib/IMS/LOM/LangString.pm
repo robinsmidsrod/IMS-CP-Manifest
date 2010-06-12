@@ -1,6 +1,6 @@
 package IMS::LOM::LangString;
 use Moose;
-with 'Rabbit::Node';
+with 'XML::Rabbit::Node';
 
 has 'language' => (
     isa         => 'Str',

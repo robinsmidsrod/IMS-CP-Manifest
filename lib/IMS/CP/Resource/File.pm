@@ -1,6 +1,6 @@
 package IMS::CP::Resource::File;
 use Moose;
-with 'Rabbit::Node';
+with 'XML::Rabbit::Node';
 
 has 'href' => (
     isa         => 'Str',

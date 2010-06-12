@@ -1,4 +1,4 @@
-use inc::Module::Install 0.91;
+use inc::Module::Install 0.99;
 
 name            'IMS-CP-Manifest';
 abstract        'IMS Content Packaging Manifest XML parser';
@@ -7,7 +7,7 @@ license         'perl';
 all_from        'lib/IMS/CP/Manifest.pm';
 
 requires        'Moose'         => '0.88';
-requires        'Rabbit'        => '0.01';
+requires        'XML::Rabbit'   => '0.0.1';
 
 test_requires   'utf8'          => '1.06';
 test_requires   'Test::More'    => '0.88';

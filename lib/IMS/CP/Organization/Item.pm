@@ -1,6 +1,6 @@
 package IMS::CP::Organization::Item;
 use Moose;
-with 'Rabbit::Node';
+with 'XML::Rabbit::Node';
 
 has 'id' => (
     isa         => 'Str',

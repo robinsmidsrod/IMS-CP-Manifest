@@ -1,6 +1,6 @@
 package IMS::CP::Manifest;
 use Moose;
-with 'Rabbit::RootNode';
+with 'XML::Rabbit::RootNode';
 
 use 5.008; # According to Perl::MinimumVersion
 our $VERSION = '0.01';
