@@ -1,0 +1,88 @@
+NAME
+    IMS::CP::Manifest - IMS Content Packaging Manifest XML parser
+
+VERSION
+    version 0.0.1
+
+DESCRIPTION
+    This is a simple (read-only) parser for IMS Content Packaging manifest
+    XML files. The specification is available from
+    <http://www.imsglobal.org/content/packaging/index.html>. It is still
+    incomplete, but it enables you to get access to the organization of all
+    the resources in the manifest and their associated files (and titles).
+
+ATTRIBUTES
+  namespace_map
+    The prefixes "cp" and "lom" are declared for use in XPath queries.
+
+  title
+    The main title of the manifest.
+
+  organizations
+    A list of organizations of content. Organizations are basically
+    different ways to organize the content in the package, e.g. linear or
+    hierarchial.
+
+SUPPORT
+    You can find documentation for this module with the perldoc command.
+
+      perldoc IMS::CP::Manifest
+
+  Websites
+    *   Search CPAN
+
+        <http://search.cpan.org/dist/IMS-CP-Manifest>
+
+    *   AnnoCPAN: Annotated CPAN documentation
+
+        <http://annocpan.org/dist/IMS-CP-Manifest>
+
+    *   CPAN Ratings
+
+        <http://cpanratings.perl.org/d/IMS-CP-Manifest>
+
+    *   CPAN Forum
+
+        <http://cpanforum.com/dist/IMS-CP-Manifest>
+
+    *   RT: CPAN's Bug Tracker
+
+        <http://rt.cpan.org/NoAuth/Bugs.html?Dist=IMS-CP-Manifest>
+
+    *   CPANTS Kwalitee
+
+        <http://cpants.perl.org/dist/overview/IMS-CP-Manifest>
+
+    *   CPAN Testers Results
+
+        <http://cpantesters.org/distro/I/IMS-CP-Manifest.html>
+
+    *   CPAN Testers Matrix
+
+        <http://matrix.cpantesters.org/?dist=IMS-CP-Manifest>
+
+    *   Source Code Repository
+
+        The code is open to the world, and available for you to hack on.
+        Please feel free to browse it and play with it, or whatever. If you
+        want to contribute patches, please send me a diff or prod me to pull
+        from your repository :)
+
+        <git://github.com/robinsmidsrod/IMS-CP-Manifest.git>
+
+  Bugs
+    Please report any bugs or feature requests to "bug-ims-cp-manifest at
+    rt.cpan.org", or through the web interface at
+    <http://rt.cpan.org/NoAuth/ReportBug.html?Queue=IMS-CP-Manifest>. I will
+    be notified, and then you'll automatically be notified of progress on
+    your bug as I make changes.
+
+AUTHOR
+      Robin Smidsrød <robin@smidsrod.no>
+
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2010 by Robin Smidsrød.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
+
