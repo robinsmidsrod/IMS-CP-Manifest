@@ -2,7 +2,7 @@ NAME
     IMS::CP::Manifest - IMS Content Packaging Manifest XML parser
 
 VERSION
-    version 0.0.1
+    version 0.0.2
 
 DESCRIPTION
     This is a simple (read-only) parser for IMS Content Packaging manifest
