@@ -85,7 +85,7 @@ XML
 chomp($file4_title_dump);
 #diag($file4->title->dump);
 is($file4->title->dump_xml, $file4_title_dump, "file4 title XML dump mismatch");
-    
+
 exit;
 
 1;
